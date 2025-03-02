@@ -3,4 +3,5 @@ project(Demolol)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Demolol main.cpp)
+add_executable(Demolol main.cpp
+        Product.h)
