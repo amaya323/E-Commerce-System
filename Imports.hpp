@@ -1,6 +1,8 @@
 #ifndef IMPORTS_HPP
 #define IMPORTS_HPP
 
+// file to import all header files
+
 #include "Class/Address.h"
 #include "Class/Customer.h"
 #include "Class/Order.h"

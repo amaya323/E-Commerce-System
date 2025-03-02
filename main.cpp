@@ -2,7 +2,7 @@
 #include "Functions.h"
 using namespace std;
 
-//Main function to run the e-commerce system
+// Main function to run the e-commerce system
 int main() {
     // List of available products
     vector<Product> productList = {
@@ -13,28 +13,27 @@ int main() {
         Product(5, "Personal Computer", 50000.00)
     };
 
-    ShoppingCart cart;
-    vector<Order> orders;
-    int choice;
-    string choicePlaceholder;
-    int backToMenu = 0;
-    int orderCount = 0;
+    ShoppingCart cart; // Shopping cart instance
+    vector<Order> orders; // Stores all orders
+    int choice; // User menu choice
+    string choicePlaceholder; // Input placeholder for validation
+    int backToMenu = 0; // Variable to handle return to menu
 
-    Customer customer;
-    getCustomer(customer, choicePlaceholder);
+    Customer customer; // Customer instance
+    getCustomer(customer, choicePlaceholder); // Get customer details
 
+    // Main loop for menu navigation
     do {
-        displayMenu();
+        displayMenu(); // Display the main menu
         getline(cin, choicePlaceholder);
-        validChoice(choicePlaceholder, choice);
+        validChoice(choicePlaceholder, choice); // Validate user choice
 
-        if (choice == 1) {
-            // Viewing products
-
+        if (choice == 1) { // Viewing products
             char addMoreToCart;
             do {
-                // Display product list
-                printTitle("Products");
+                printTitle("Products"); // Display product list header
+
+                // Display product details
                 cout << left << setw(12) << "Product ID"
                         << setw(20) << "Name"
                         << setw(10) << "Price"
@@ -50,6 +49,8 @@ int main() {
                 cout << endl << "[" << productList.size() + 1 << "] Back to Menu" << endl;
 
                 int productId, quantity;
+
+                // Prompt user to select a product by ID
                 while (true) {
                     cout << "Enter product ID to add to cart: ";
                     getline(cin, choicePlaceholder);
@@ -60,8 +61,9 @@ int main() {
                     cout << endl << "Error: Invalid Product ID" << endl << endl;
                 }
 
-                if (productId == productList.size() + 1) { break; }
+                if (productId == productList.size() + 1) { break; } // Return to menu
 
+                // Prompt user to enter quantity
                 while (true) {
                     cout << "Enter quantity: ";
                     getline(cin, choicePlaceholder);
@@ -72,43 +74,55 @@ int main() {
                     }
                     cout << "Error: Enter a valid quantity." << endl;
                 }
+
+                // Ask if the user wants to add another product
                 yesOrNo("Do you want to add another product? (Y/N): ", choicePlaceholder, addMoreToCart);
             } while (addMoreToCart == 'Y' || addMoreToCart == 'y');
-        } else if (choice == 2) {
-            // Viewing shopping cart
 
+        } else if (choice == 2) { // Viewing shopping cart
             printTitle("Shopping Cart");
-            if (cart.getItems().empty()) {
+
+            if (cart.getItems().empty()) { // Check if cart is empty
                 cout << "Your shopping cart is empty." << endl;
                 backMenu(choicePlaceholder, backToMenu);
                 continue;
             }
-            cart.viewCart();
+
+            cart.viewCart(); // Display cart contents
+
             char checkOut;
             yesOrNo("Checkout all products? (Y/N): ", choicePlaceholder, checkOut);
 
             if (checkOut == 'y') {
-                //if user checks out clear the cart
+                // Display address selection
                 printTitle("Addresses");
                 int addressChoice;
-                if (customer.getAddresses().size() == 0) {
+
+                // If no saved address, ask user to add an address or cancel order
+                if (customer.getAddresses().empty()) {
                     cout << "You have no saved addresses." << endl << endl;
                     cout << "[1] Add address" << endl;
                     cout << "[2] Cancel (Back to Menu)" << endl << endl;
 
+                    // Validate choice input
                     do {
                         getline(cin, choicePlaceholder);
                         validChoice(choicePlaceholder, addressChoice);
                     } while (addressChoice != 1 && addressChoice != 2);
-                    if (addressChoice == 1) {
+
+                    if (addressChoice == 1) { // Add address
                         getShippingAddress(customer, choicePlaceholder);
-                    } else {
+                    } else { // Cancel (Back to Menu)
                         continue;
                     }
                 }
-                if (customer.getAddresses().size() != 0) {
+
+                // Print addresses of the customer
+                if (!customer.getAddresses().empty()) {
                     printTitle("Addresses");
                     customer.printAddresses();
+
+                    // Validate address choice of customer
                     while (true) {
                         cout << endl << "Choose an address for shipping: ";
                         getline(cin, choicePlaceholder);
@@ -119,30 +133,32 @@ int main() {
                         cout << endl << "Error: Invalid address choice." << endl;
                     }
                 }
+
+                // Customer choose cancel order (back to menu)
                 if (addressChoice == customer.getAddresses().size() + 1) { continue; }
 
-                orderCount++;
-                orders.emplace_back(orderCount, cart.getItems(), customer.getAddresses()[addressChoice - 1]);
+                // Create a new order and clear cart
+                orders.emplace_back(orders.size() + 1, cart.getItems(), customer.getAddresses()[addressChoice - 1]);
                 cart.clearCart();
+
                 cout << "Successfully checked out the products! Order ID: " << orders.size() << endl;
                 backMenu(choicePlaceholder, backToMenu);
             }
-        } else if (choice == 3) {
-            // Viewing orders
+        } else if (choice == 3) { // Viewing orders
             printTitle("Orders");
+
             if (orders.empty()) {
                 cout << "No orders placed." << endl;
                 backMenu(choicePlaceholder, backToMenu);
                 continue;
             }
 
-            for (const auto &order: orders) {
+            for (const auto &order: orders) { // Display all orders
                 order.viewOrder();
                 cout << endl;
             }
             backMenu(choicePlaceholder, backToMenu);
-        } else if (choice == 4) {
-            // Exiting
+        } else if (choice == 4) { // Exiting
             cout << "Thank you for shopping with us!" << endl;
         } else {
             cout << "Error: Please enter a valid choice." << endl;

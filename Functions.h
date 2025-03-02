@@ -87,7 +87,6 @@ void backMenu(string& placeholder, int& backToMenu) {
 // Function to handle Yes or No input validation
 void yesOrNo(string question, string& placeholder, char& yOrN) {
     cout << endl << question;
-
     // Ensure input is only 'Y' or 'N' (case-insensitive)
     do {
         getline(cin, placeholder);

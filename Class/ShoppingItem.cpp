@@ -8,6 +8,8 @@ Product ShoppingItem::getProduct() const {
     return product;
 }
 
+
+
 int ShoppingItem::getQuantity() const {
     return quantity;
 }
