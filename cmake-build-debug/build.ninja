@@ -55,6 +55,48 @@ build CMakeFiles/Demolol.dir/main.cpp.obj: CXX_COMPILER__Demolol_unscanned_Debug
   OBJECT_DIR = CMakeFiles\Demolol.dir
   OBJECT_FILE_DIR = CMakeFiles\Demolol.dir
 
+build CMakeFiles/Demolol.dir/Class/Address.cpp.obj: CXX_COMPILER__Demolol_unscanned_Debug C$:/Users/balio/Demolol/Class/Address.cpp || cmake_object_order_depends_target_Demolol
+  DEP_FILE = CMakeFiles\Demolol.dir\Class\Address.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Demolol.dir
+  OBJECT_FILE_DIR = CMakeFiles\Demolol.dir\Class
+
+build CMakeFiles/Demolol.dir/Class/Customer.cpp.obj: CXX_COMPILER__Demolol_unscanned_Debug C$:/Users/balio/Demolol/Class/Customer.cpp || cmake_object_order_depends_target_Demolol
+  DEP_FILE = CMakeFiles\Demolol.dir\Class\Customer.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Demolol.dir
+  OBJECT_FILE_DIR = CMakeFiles\Demolol.dir\Class
+
+build CMakeFiles/Demolol.dir/Class/Order.cpp.obj: CXX_COMPILER__Demolol_unscanned_Debug C$:/Users/balio/Demolol/Class/Order.cpp || cmake_object_order_depends_target_Demolol
+  DEP_FILE = CMakeFiles\Demolol.dir\Class\Order.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Demolol.dir
+  OBJECT_FILE_DIR = CMakeFiles\Demolol.dir\Class
+
+build CMakeFiles/Demolol.dir/Class/Product.cpp.obj: CXX_COMPILER__Demolol_unscanned_Debug C$:/Users/balio/Demolol/Class/Product.cpp || cmake_object_order_depends_target_Demolol
+  DEP_FILE = CMakeFiles\Demolol.dir\Class\Product.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Demolol.dir
+  OBJECT_FILE_DIR = CMakeFiles\Demolol.dir\Class
+
+build CMakeFiles/Demolol.dir/Class/ShoppingCart.cpp.obj: CXX_COMPILER__Demolol_unscanned_Debug C$:/Users/balio/Demolol/Class/ShoppingCart.cpp || cmake_object_order_depends_target_Demolol
+  DEP_FILE = CMakeFiles\Demolol.dir\Class\ShoppingCart.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Demolol.dir
+  OBJECT_FILE_DIR = CMakeFiles\Demolol.dir\Class
+
+build CMakeFiles/Demolol.dir/Class/ShoppingItem.cpp.obj: CXX_COMPILER__Demolol_unscanned_Debug C$:/Users/balio/Demolol/Class/ShoppingItem.cpp || cmake_object_order_depends_target_Demolol
+  DEP_FILE = CMakeFiles\Demolol.dir\Class\ShoppingItem.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Demolol.dir
+  OBJECT_FILE_DIR = CMakeFiles\Demolol.dir\Class
+
+build CMakeFiles/Demolol.dir/Functions.cpp.obj: CXX_COMPILER__Demolol_unscanned_Debug C$:/Users/balio/Demolol/Functions.cpp || cmake_object_order_depends_target_Demolol
+  DEP_FILE = CMakeFiles\Demolol.dir\Functions.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Demolol.dir
+  OBJECT_FILE_DIR = CMakeFiles\Demolol.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Demolol
@@ -63,7 +105,7 @@ build CMakeFiles/Demolol.dir/main.cpp.obj: CXX_COMPILER__Demolol_unscanned_Debug
 #############################################
 # Link the executable Demolol.exe
 
-build Demolol.exe: CXX_EXECUTABLE_LINKER__Demolol_Debug CMakeFiles/Demolol.dir/main.cpp.obj
+build Demolol.exe: CXX_EXECUTABLE_LINKER__Demolol_Debug CMakeFiles/Demolol.dir/main.cpp.obj CMakeFiles/Demolol.dir/Class/Address.cpp.obj CMakeFiles/Demolol.dir/Class/Customer.cpp.obj CMakeFiles/Demolol.dir/Class/Order.cpp.obj CMakeFiles/Demolol.dir/Class/Product.cpp.obj CMakeFiles/Demolol.dir/Class/ShoppingCart.cpp.obj CMakeFiles/Demolol.dir/Class/ShoppingItem.cpp.obj CMakeFiles/Demolol.dir/Functions.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Demolol.dir
