@@ -15,7 +15,11 @@ private:
 public:
     // Constructor to initialize address details
     Address(string n, string a);
+
+    // Getter for Name of the recipient
     string getName() const;
+
+    // Getter for the Address of the recipient
     string getAddress() const;
 };
 

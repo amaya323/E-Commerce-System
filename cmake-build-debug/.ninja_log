@@ -1,3 +1,20 @@
 # ninja log v6
-6	1337	7626095966925140	CMakeFiles/Demolol.dir/main.cpp.obj	48bfd70a463da202
 1337	1539	7626095980237354	Demolol.exe	ea5b4127da0f9c20
+5	1131	7626197202787833	CMakeFiles/Demolol.dir/main.cpp.obj	48bfd70a463da202
+16	2091	7626196537314441	CMakeFiles/Demolol.dir/Class/Address.cpp.obj	e7688fd28be4d743
+22	2309	7626196537380479	CMakeFiles/Demolol.dir/Class/Customer.cpp.obj	dd9553dd91151e0b
+2309	4194	7626196560253950	CMakeFiles/Demolol.dir/Class/Product.cpp.obj	d379a3438ecbf4f8
+2092	4263	7626196558076050	CMakeFiles/Demolol.dir/Class/Order.cpp.obj	1259823a900dfcb1
+2943	4732	7626196566582913	CMakeFiles/Demolol.dir/Class/ShoppingCart.cpp.obj	66befa022eda393e
+4194	5133	7626196579104588	CMakeFiles/Demolol.dir/Class/ShoppingItem.cpp.obj	53ff384f52f305ac
+4263	5259	7626196579791924	CMakeFiles/Demolol.dir/Functions.cpp.obj	5c01785ce1cdb063
+6	1113	7626198468374782	CMakeFiles/Demolol.dir/main.cpp.obj	48bfd70a463da202
+1114	1305	7626198479454019	Demolol.exe	687bd5afac7174f9
+28	2321	7626243459002573	CMakeFiles/Demolol.dir/Class/Address.cpp.obj	e7688fd28be4d743
+35	2660	7626243459082293	CMakeFiles/Demolol.dir/Class/Customer.cpp.obj	dd9553dd91151e0b
+15	3226	7626243458892808	CMakeFiles/Demolol.dir/main.cpp.obj	48bfd70a463da202
+2660	4722	7626243485331186	CMakeFiles/Demolol.dir/Class/Product.cpp.obj	d379a3438ecbf4f8
+2322	5092	7626243481950138	CMakeFiles/Demolol.dir/Class/Order.cpp.obj	1259823a900dfcb1
+3226	5525	7626243490989627	CMakeFiles/Demolol.dir/Class/ShoppingCart.cpp.obj	66befa022eda393e
+4722	6439	7626243505949007	CMakeFiles/Demolol.dir/Class/ShoppingItem.cpp.obj	53ff384f52f305ac
+6439	6771	7626243523122693	Demolol.exe	687bd5afac7174f9

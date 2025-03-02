@@ -6,12 +6,18 @@
 class ShoppingItem {
 private:
     int quantity;
-public:
     Product product;
+public:
+
+    // Default constructor for shopping item (item = product and quantity)
     ShoppingItem(Product p, int qty);
+
+    // Getter for product
     Product getProduct() const;
+
+    // Getter for quantity of the product to order or add to cart
     int getQuantity() const;
-    double getTotal() const;
+
 };
 
 #endif //SHOPPINGITEM_H

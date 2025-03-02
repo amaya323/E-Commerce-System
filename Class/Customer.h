@@ -15,10 +15,19 @@ private:
     vector<Address> addresses;
 
 public:
+    // Setter for customer ID
     void setCustomerId(int id);
+
+    // Setter for customer name
     void setCustomerName(string name);
+
+    // Function to add address
     void addAddress(string name, string address);
+
+    // Getter for addresses
     vector <Address> getAddresses() const;
+
+    // Function to print all addresses
     void printAddresses();
 };
 #endif //CUSTOMER_H

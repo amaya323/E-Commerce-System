@@ -16,4 +16,5 @@ add_executable(Demolol main.cpp
         Class/ShoppingCart.h
         Class/ShoppingItem.cpp
         Class/ShoppingItem.h
-        Functions.cpp)
+        Functions.h
+)

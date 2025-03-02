@@ -13,7 +13,7 @@ int Order::getOrderId() const {
 double Order::getTotalAmount() const {
     double total = 0;
     for (const auto &item: orderItems) {
-        total += item.product.getPrice() * item.getQuantity();
+        total += item.getProduct().getPrice() * item.getQuantity();
     }
     return total;
 }
@@ -31,9 +31,9 @@ void Order::viewOrder() const {
     cout << string(52, '-') << endl;
 
     for (const auto &item: orderItems) {
-        cout << left << setw(12) << item.product.getProductId()
-                << setw(20) << item.product.getProductName()
-                << setw(10) << fixed << setprecision(2) << item.product.getPrice()
+        cout << left << setw(12) << item.getProduct().getProductId()
+                << setw(20) << item.getProduct().getProductName()
+                << setw(10) << fixed << setprecision(2) << item.getProduct().getPrice()
                 << setw(10) << item.getQuantity()
                 << endl;
     }

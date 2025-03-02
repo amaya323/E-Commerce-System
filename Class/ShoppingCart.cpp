@@ -8,7 +8,7 @@ void ShoppingCart::addItem(const Product &product, int qty) {
 double ShoppingCart::getTotalPrice() const {
     double total = 0;
     for (const auto &item: shoppingItems) {
-        total += item.product.getPrice() * item.getQuantity();
+        total += item.getProduct().getPrice() * item.getQuantity();
     }
     return total;
 }
@@ -23,9 +23,9 @@ void ShoppingCart::viewCart() const {
     cout << string(52, '-') << endl; // Print a separator line
 
     for (const auto &item: shoppingItems) {
-        cout << left << setw(12) << item.product.getProductId()
-                << setw(20) << item.product.getProductName()
-                << setw(10) << fixed << setprecision(2) << item.product.getPrice()
+        cout << left << setw(12) << item.getProduct().getProductId()
+                << setw(20) << item.getProduct().getProductName()
+                << setw(10) << fixed << setprecision(2) << item.getProduct().getPrice()
                 << setw(10) << item.getQuantity()
                 << endl;
     }

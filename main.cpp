@@ -1,5 +1,5 @@
 #include "Imports.hpp"
-#include "Functions.cpp"
+#include "Functions.h"
 using namespace std;
 
 //Main function to run the e-commerce system

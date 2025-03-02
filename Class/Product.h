@@ -15,9 +15,17 @@ private:
     double price;
 
 public:
+
+    // Default constructor for products (ID, Name, Price)
     Product (int id, string name, double p);
+
+    // Getter for product ID
     int getProductId() const;
+
+    // Getter for product name
     string getProductName() const;
+
+    // Getter for product price
     double getPrice() const;
 };
 #endif //PRODUCT_H
