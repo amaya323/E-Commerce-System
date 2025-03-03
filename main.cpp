@@ -26,7 +26,7 @@ int main() {
     do {
         displayMenu(); // Display the main menu
         getline(cin, choicePlaceholder);
-        validChoice(choicePlaceholder, choice); // Validate user choice
+        validNumber(choicePlaceholder, choice); // Validate user choice
 
         if (choice == 1) { // Viewing products
             char addMoreToCart;
@@ -51,29 +51,33 @@ int main() {
                 int productId, quantity;
 
                 // Prompt user to select a product by ID
-                while (true) {
+                bool isProductIdValid = false;
+                do {
                     cout << "Enter product ID to add to cart: ";
                     getline(cin, choicePlaceholder);
-                    validChoice(choicePlaceholder, productId);
+                    validNumber(choicePlaceholder, productId);
                     if (productId > 0 && productId <= productList.size() + 1) {
-                        break;
+                        isProductIdValid = true;
+                    } else {
+                        cout << endl << "Error: Invalid Product ID" << endl << endl;
                     }
-                    cout << endl << "Error: Invalid Product ID" << endl << endl;
-                }
+                }while (!isProductIdValid);
 
                 if (productId == productList.size() + 1) { break; } // Return to menu
 
                 // Prompt user to enter quantity
-                while (true) {
+                bool isQuantityValid = false;
+                do {
                     cout << "Enter quantity: ";
                     getline(cin, choicePlaceholder);
-                    validChoice(choicePlaceholder, quantity);
+                    validNumber(choicePlaceholder, quantity);
                     if (quantity != -1) {
                         cart.addItem(productList[productId - 1], quantity);
-                        break;
+                        isQuantityValid = true;
+                    } else {
+                        cout << "Error: Enter a valid quantity." << endl;
                     }
-                    cout << "Error: Enter a valid quantity." << endl;
-                }
+                }while (!isQuantityValid);
 
                 // Ask if the user wants to add another product
                 yesOrNo("Do you want to add another product? (Y/N): ", choicePlaceholder, addMoreToCart);
@@ -107,7 +111,7 @@ int main() {
                     // Validate choice input
                     do {
                         getline(cin, choicePlaceholder);
-                        validChoice(choicePlaceholder, addressChoice);
+                        validNumber(choicePlaceholder, addressChoice);
                     } while (addressChoice != 1 && addressChoice != 2);
 
                     if (addressChoice == 1) { // Add address
@@ -123,15 +127,17 @@ int main() {
                     customer.printAddresses();
 
                     // Validate address choice of customer
-                    while (true) {
+                    bool isValidAddress = false;
+                    do {
                         cout << endl << "Choose an address for shipping: ";
                         getline(cin, choicePlaceholder);
-                        validChoice(choicePlaceholder, addressChoice);
+                        validNumber(choicePlaceholder, addressChoice);
                         if (!(addressChoice <= 0 || addressChoice > customer.getAddresses().size() + 1)) {
-                            break;
+                            isValidAddress = true;
+                        } else {
+                            cout << endl << "Error: Invalid address choice." << endl;
                         }
-                        cout << endl << "Error: Invalid address choice." << endl;
-                    }
+                    } while (!isValidAddress);
                 }
 
                 // Customer choose cancel order (back to menu)

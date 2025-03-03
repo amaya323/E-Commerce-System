@@ -1,7 +1,5 @@
-
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
-
 
 #include "Imports.hpp"
 
@@ -32,7 +30,7 @@ void displayMenu() {
 }
 
 // Function to validate user input as an integer choice
-bool validChoice(const string& input, int &output) {
+bool validNumber(const string& input, int &output) {
     // Check if the input contains a decimal point (not an integer)
     if (input.find('.') != string::npos) {
         output = -1;
@@ -72,16 +70,11 @@ bool validChoice(const string& input, int &output) {
 // Function to handle returning to the menu
 void backMenu(string& placeholder, int& backToMenu) {
     cout << endl << "[1] Back to Menu." << endl;
-
-    while (true) {
+    // Exit loop if user enters 1
+    do {
         getline(cin, placeholder);
-        validChoice(placeholder, backToMenu);
-
-        // Exit loop if user enters 1
-        if (backToMenu == 1) {
-            break;
-        }
-    }
+        validNumber(placeholder, backToMenu);
+    } while (backToMenu != 1);
 }
 
 // Function to handle Yes or No input validation
@@ -101,17 +94,30 @@ void getShippingAddress(Customer& customer, string& placeholder) {
     do {
         string name;
         string address;
+        string contact;
 
         // Get order recipient name
-        cout << "Enter name of order recipient: ";
+        cout << endl << "Enter recipient's name: ";
         getline(cin, name);
 
         // Get recipient address
-        cout << "Enter address of order recipient: ";
+        cout << "Enter recipient's address: ";
         getline(cin, address);
 
+        // Get contact number
+        bool isContactValid = false;
+        do {
+            cout << "Enter recipient's number (09XXXXXXXXX): ";
+            getline(cin, contact);
+            if (contact.size() == 11 && contact[0] == '0' && contact[1] == '9') {
+                isContactValid = true;
+            } else {
+                cout << endl <<"Error: Invalid contact number. " << endl << endl;
+            }
+        } while (!isContactValid);
+
         // Add address to the customer's address list
-        customer.addAddress(name, address);
+        customer.addAddress(name, address, contact);
 
         // Ask if the user wants to add another address
         yesOrNo("Do you want to add another address? (Y/N): ", placeholder, anotherAddress);
@@ -143,6 +149,5 @@ void getCustomer(Customer& customer, string& placeholder) {
         getShippingAddress(customer, placeholder);
     }
 }
-
 
 #endif //FUNCTIONS_H

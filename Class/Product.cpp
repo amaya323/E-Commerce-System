@@ -1,6 +1,10 @@
 #include "Product.h"
 
-Product::Product (int id, string name, double p): productId(id), productName(name), price(p){}
+Product::Product (int productId, string productName, double price){
+    this->productId = productId;
+    this->productName = productName;
+    this->price = price;
+}
 
 int Product::getProductId() const{
     return productId;

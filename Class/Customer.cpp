@@ -8,8 +8,8 @@ void Customer::setCustomerName(string name) {
     customerName = name;
 }
 
-void Customer::addAddress(string name, string address) {
-    addresses.emplace_back(name, address);
+void Customer::addAddress(string name, string address, string contact) {
+    addresses.emplace_back(name, address, contact);
 }
 
 vector<Address> Customer::getAddresses() const {

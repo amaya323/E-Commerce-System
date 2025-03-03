@@ -1,9 +1,9 @@
 
 #include "Order.h"
 
-Order::Order(int id, vector<ShoppingItem> items, Address add): address(add) {
-    orderId = id;
-    orderItems = items;
+Order::Order(int orderId, vector<ShoppingItem> orderItems, Address add): address(add) {
+    this->orderId = orderId;
+    this->orderItems = orderItems;
 }
 
 int Order::getOrderId() const {
@@ -19,8 +19,12 @@ double Order::getTotalAmount() const {
 }
 
 void Order::viewOrder() const {
+    cout << "Shipping Details:" << endl;
+    cout << "Received by: " << address.getName() << endl;
+    cout << "Contact Number: " << address.getContactNumber() << endl;
+    cout << "Address: " << address.getAddress() << endl << endl;
+
     cout << "Order ID: " << orderId << endl;
-    cout << "Shipping address: " << address.getAddress() << endl;
     cout << "Total Amount: " << fixed << setprecision(2) << getTotalAmount() << endl;
     cout << left << setw(12) << "Product ID"
             << setw(20) << "Name"
@@ -37,6 +41,4 @@ void Order::viewOrder() const {
                 << setw(10) << item.getQuantity()
                 << endl;
     }
-    cout << string(52, '-') << endl;
-    cout << "Total: " << getTotalAmount() << endl;
 }
