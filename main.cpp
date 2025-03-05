@@ -18,11 +18,19 @@ int main() {
     string choicePlaceholder; // Input placeholder for validation
     int choice; // User menu choice
     int backToMenu = 0; // Variable to handle return to menu
+    string name;
 
-    Customer customer; // Customer instance
+     // Customer instance
+
+    printTitle("Welcome Customer!");
+    cout << "Enter name: ";
+    getline(cin, name);
+    Customer customer(1, name);
+
 
     // Main loop for menu navigation
     do {
+        backToMenu = productList.size() + 1; // Return to menu choice number is the number of products + 1;
         displayMenu(); // Display the main menu
         getline(cin, choicePlaceholder);
         validNumber(choicePlaceholder, choice); // Validate user choice
@@ -33,33 +41,21 @@ int main() {
                 printTitle("Products"); // Display product list header
 
                 // Display product details
-                cout << left << setw(12) << "Product ID"
-                        << setw(20) << "Name"
-                        << setw(10) << "Price"
-                        << endl;
-                cout << string(52, '-') << endl;
-
-                for (const auto &item: productList) {
-                    cout << left << setw(12) << item.getProductId()
-                            << setw(20) << item.getProductName()
-                            << setw(10) << fixed << setprecision(2) << item.getPrice()
-                            << endl;
-                }
-                cout << endl << "[" << productList.size() + 1 << "] Back to Menu" << endl;
+                displayProduct(productList);
 
                 int productId, quantity;
 
                 // Prompt user to select a product by ID
                 getValidatedInput("Enter product ID to add to cart: ", productId, 1, productList.size() + 1);
 
-                if (productId == productList.size() + 1) { break; } // Return to menu
+                if (productId == backToMenu) { break; } // Return to menu
 
                 // Prompt user to enter quantity
                 getValidatedInput("Enter quantity: ", quantity, 1, INT_MAX);
                 cart.addItem(productList[productId - 1], quantity);
 
                 // Ask if the user wants to add another product
-                yesOrNo("Do you want to add another product? (Y/N): ", choicePlaceholder, addMoreToCart);
+                askYesOrNo("Do you want to add another product? (Y/N): ", choicePlaceholder, addMoreToCart);
             } while (tolower(addMoreToCart) == 'y');
 
         } else if (choice == 2) { // Viewing shopping cart
@@ -74,12 +70,12 @@ int main() {
             cart.viewCart(); // Display cart contents
 
             char checkOut;
-            yesOrNo("Checkout all products? (Y/N): ", choicePlaceholder, checkOut);
+            askYesOrNo("Checkout all products? (Y/N): ", choicePlaceholder, checkOut);
 
             if (checkOut == 'y') {
                 // Display address selection
                 printTitle("Addresses");
-                int addressChoice;
+                int addressChoice = 0;
 
                 // If no saved address, ask user to add an address or cancel order
                 if (customer.getAddresses().empty()) {
@@ -94,26 +90,40 @@ int main() {
                     } while (addressChoice != 1 && addressChoice != 2);
 
                     if (addressChoice == 1) { // Add address
-                        getShippingAddress(customer, choicePlaceholder);
+                        getShippingAddress(customer);
                     } else { // Cancel (Back to Menu)
                         continue;
                     }
                 }
+                bool addAnotherAddress;
 
-                // Print addresses of the customer
-                if (!customer.getAddresses().empty()) {
-                    printTitle("Addresses");
-                    customer.printAddresses();
+                do{
+                    int maxVal = customer.getAddresses().size() + 2;
+                    addressChoice = 0;
+                    addAnotherAddress = false;
+                    // Print addresses of the customer
+                    if (!customer.getAddresses().empty()) {
+                        printTitle("Addresses");
+                        customer.printAddresses();
 
-                    // Validate address choice of customer
-                    getValidatedInput("Choose an address for shipping: ", addressChoice, 1, customer.getAddresses().size() + 1);
-                }
+                        // Validate address choice of customer
+                        getValidatedInput("Choose an address for shipping: ", addressChoice, 1, maxVal);
+                    }
+
+                    if (addressChoice == maxVal - 1){
+                        getShippingAddress(customer);
+                        addAnotherAddress = true;
+                    }
+                }while (addAnotherAddress);
+
 
                 // Customer choose cancel order (back to menu)
-                if (addressChoice == customer.getAddresses().size() + 1) { continue; }
+                if (addressChoice == customer.getAddresses().size() + 2){continue;}
+
 
                 // Create a new order and clear cart
-                orders.emplace_back(orders.size() + 1, cart.getItems(), customer);
+                cout << addressChoice;
+                orders.emplace_back(orders.size() + 1, cart.getItems(), customer, customer.getAddresses()[addressChoice]);
                 cart.clearCart();
 
                 cout << "Successfully checked out the products! Order ID: " << orders.size() << endl;
@@ -129,7 +139,7 @@ int main() {
             }
 
             for (const auto &order: orders) { // Display all orders
-                order.viewOrder();
+                order.viewShoppingItems();
                 cout << endl;
             }
             backMenu(choicePlaceholder, backToMenu);

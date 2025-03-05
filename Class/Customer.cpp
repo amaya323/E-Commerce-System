@@ -1,11 +1,8 @@
 #include "Customer.h"
 
-void Customer::setCustomerId(int id) {
-    customerId = id;
-}
-
-void Customer::setCustomerName(string name) {
-    customerName = name;
+Customer::Customer(int customerId, string customerName){
+    this->customerId = customerId;
+    this->customerName = customerName;
 }
 
 void Customer::addAddress(string address, string contact) {
@@ -22,7 +19,8 @@ vector<Address> Customer::getAddresses() const {
 
 void Customer::printAddresses() {
     cout << left << setw(5) << " "
-            << setw(12) << "Address"
+            << setw(20) << "Address"
+            << setw(12) << "Contact"
             << endl;
     cout << string(52, '-') << endl; // Print a separator line
 
@@ -30,9 +28,11 @@ void Customer::printAddresses() {
     for (const auto &address: addresses) {
         counter++;
         cout << left << setw(5) << counter
-                << setw(12) << address.getAddress()
+                << setw(20) << address.getAddress()
+                << setw(12) << address.getContactNumber()
                 << endl;
     }
     cout << string(52, '-') << endl;
-    cout << endl << "[" << addresses.size() + 1 << "] Cancel (Back to Menu)" << endl;
+    cout << endl << "[" << addresses.size() + 1 << "] Add Address" << endl;
+    cout << "[" << addresses.size() + 2 << "] Cancel (Back to Menu)" << endl;
 }

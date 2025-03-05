@@ -1,7 +1,7 @@
 #include "ShoppingItem.h"
 
 ShoppingItem::ShoppingItem(Product product, int quantity): product(product) {
-    quantity = quantity;
+    this->quantity = quantity;
 }
 
 Product ShoppingItem::getProduct() const {

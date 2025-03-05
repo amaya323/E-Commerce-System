@@ -1,6 +1,7 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+#include <algorithm>
 #include "Imports.hpp"
 
 using namespace std;
@@ -18,7 +19,6 @@ void printTitle(const string &title) {
 
 // Function to display the main menu
 void displayMenu() {
-    system("cls"); // Clear the console screen
     printTitle("E-Commerce System Menu"); // Print menu title
 
     // Display menu options
@@ -30,7 +30,7 @@ void displayMenu() {
 }
 
 // Function to validate user input as an integer choice
-bool validNumber(const string& input, int &output) {
+bool validNumber(const string &input, int &output) {
     // Check if the input contains a decimal point (not an integer)
     if (input.find('.') != string::npos) {
         output = -1;
@@ -38,7 +38,7 @@ bool validNumber(const string& input, int &output) {
     }
 
     // Ensure all characters are digits
-    for (char c : input) {
+    for (char c: input) {
         if (!isdigit(c)) {
             output = -1;
             return false;
@@ -56,7 +56,7 @@ bool validNumber(const string& input, int &output) {
         }
         return true;
     }
-    // Catch exceptions for invalid input (non-numeric or out-of-range values)
+        // Catch exceptions for invalid input (non-numeric or out-of-range values)
     catch (invalid_argument &e) {
         output = -1;
         return false;
@@ -84,8 +84,8 @@ void getValidatedInput(const string &prompt, int &output, int minVal, int maxVal
     } while (!isValid);
 }
 
-// Function to handle returning to the menu
-void backMenu(string& placeholder, int& backToMenu) {
+// Function to handle returning to the menu, once use inputs '1' return to menu else, stay
+void backMenu(string &placeholder, int &backToMenu) {
     cout << endl << "[1] Back to Menu." << endl;
     // Exit loop if user enters 1
     do {
@@ -95,7 +95,7 @@ void backMenu(string& placeholder, int& backToMenu) {
 }
 
 // Function to handle Yes or No input validation
-void yesOrNo(string question, string& placeholder, char& yOrN) {
+void askYesOrNo(string question, string &placeholder, char &yOrN) {
     cout << endl << question;
     // Ensure input is only 'Y' or 'N' (case-insensitive)
     do {
@@ -105,58 +105,59 @@ void yesOrNo(string question, string& placeholder, char& yOrN) {
 }
 
 // Function to get the shipping address from the customer
-void getShippingAddress(Customer& customer, string& placeholder) {
-    char anotherAddress = 0; // Variable to store user response
+void getShippingAddress(Customer &customer) {
+    string address;
+    string contact;
 
+    // Get recipient address
+    cout << "Enter address: ";
+    getline(cin, address);
+
+    // Get contact number
+
+    bool isContactValid;
     do {
-        string address;
-        string contact;
+        isContactValid = true;
+        cout << "Enter number (09XXXXXXXXX): ";
+        getline(cin, contact);
 
-        // Get recipient address
-        cout << "Enter address: ";
-        getline(cin, address);
-
-        // Get contact number
-        bool isContactValid = false;
-        do {
-            cout << "Enter number (09XXXXXXXXX): ";
-            getline(cin, contact);
-            if (contact.size() == 11 && contact[0] == '0' && contact[1] == '9') {
-                isContactValid = true;
-            } else {
-                cout << endl <<"Error: Invalid contact number. " << endl << endl;
+        // Ensure all characters are digits
+        for (char c: contact) {
+            if (!isdigit(c)) {
+                isContactValid = false;
+                break;
             }
-        } while (!isContactValid);
+        }
 
-        // Add address to the customer's address list
-        customer.addAddress(address, contact);
+        // Validate format: exactly 11 digits & starts with "09"
+        if (isContactValid && contact.size() != 11 || contact[0] != '0' || contact[1] != '9') {
+            isContactValid = false;
+        }
 
-        // Ask if the user wants to add another address
-        yesOrNo("Do you want to add another address? (Y/N): ", placeholder, anotherAddress);
+        if (!isContactValid) {
+            cout << endl << "Error: Invalid contact number." << endl;
+        }
 
-    } while (anotherAddress == 'Y' || anotherAddress == 'y'); // Continue if 'Y' or 'y' is entered
+    } while (!isContactValid);  // Loop continues only if contact is invalid
+
+    // Add address to the customer's address list
+    customer.addAddress(address, contact);
 }
 
-// Function to collect customer information
-void getCustomer(Customer& customer, string& placeholder) {
-    char addShipping = 0; // Variable to store user response
-    string name;
 
-    // Get customer name
-    cout << "Enter name: ";
-    getline(cin, name);
+void displayProduct(const vector<Product>& products) {
+// Display product details
+    cout << left << setw(12) << "Product ID" << setw(20) << "Name" << setw(10) << "Price" << endl;
+    cout << string(52, '-') << endl;
 
-    // Set customer details (assuming ID is set to 1 for now)
-    customer.setCustomerId(1);
-    customer.setCustomerName(name);
-
-    // Ask if the customer wants to add a shipping address
-    yesOrNo("Do you want to add a shipping address? (Y/N): ", placeholder, addShipping);
-
-    // If user chooses to add a shipping address, call the function to collect addresses
-    if (tolower(addShipping) == 'y') {
-        getShippingAddress(customer, placeholder);
+    for (const auto &product: products) {
+        cout << left << setw(12) << product.getProductId()
+             << setw(20) << product.getProductName()
+             << setw(10) << fixed << setprecision(2) << product.getPrice()
+             << endl;
     }
+
+    cout << endl << "[" << products.size() + 1 << "] Back to Menu" << endl;
 }
 
 #endif //FUNCTIONS_H

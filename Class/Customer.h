@@ -15,15 +15,13 @@ private:
     vector<Address> addresses;
 
 public:
-    // Setter for customer ID
-    void setCustomerId(int id);
-
-    // Setter for customer name
-    void setCustomerName(string name);
+    //Default constructor for customer
+    Customer(int customerId, string customerName);
 
     // Function to add address
     void addAddress(string address, string contact);
 
+    // Getter fot customer name
     string getName() const;
 
     // Getter for addresses
