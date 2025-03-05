@@ -3,12 +3,15 @@
 
 #include <utility>
 
-Order::Order(int orderId, vector<ShoppingItem> orderItems, const Customer &customer, Address address): customer(customer), address(address){
+Order::Order(int orderId, vector<ShoppingItem> orderItems, const Customer& customer, int addressId): customer(customer){
     this->orderId = orderId;
     this->orderItems = orderItems;
+    this->addressId = addressId;
 }
 
-
+int Order::getAddressId() const {
+    return addressId;
+}
 
 double Order::getTotalPrice() const {
     double total = 0;
@@ -19,12 +22,10 @@ double Order::getTotalPrice() const {
 }
 
 void Order::viewShoppingItems() const {
-
-    cout << address.getContactNumber() << endl;
     cout << "Shipping Details:" << endl;
     cout << "Received by: " <<customer.getName() << endl;
-    cout << "Contact Number: " << address.getContactNumber() << endl;
-    cout << "Address: " << address.getAddress() << endl << endl;
+    cout << "Contact Number: " << customer.getAddresses()[getAddressId()].getContactNumber() << endl;
+    cout << "Address: " << customer.getAddresses()[getAddressId()].getAddress() << endl << endl;
 
     cout << "Order ID: " << orderId << endl << endl;
 

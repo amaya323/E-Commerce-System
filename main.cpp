@@ -95,10 +95,10 @@ int main() {
                         continue;
                     }
                 }
-                bool addAnotherAddress;
 
+                // Loop for getting address of customer
+                bool addAnotherAddress;
                 do{
-                    int maxVal = customer.getAddresses().size() + 2;
                     addressChoice = 0;
                     addAnotherAddress = false;
                     // Print addresses of the customer
@@ -107,10 +107,10 @@ int main() {
                         customer.printAddresses();
 
                         // Validate address choice of customer
-                        getValidatedInput("Choose an address for shipping: ", addressChoice, 1, maxVal);
+                        getValidatedInput("Choose an address for shipping: ", addressChoice, 1, customer.getAddresses().size() + 2);
                     }
 
-                    if (addressChoice == maxVal - 1){
+                    if (addressChoice == customer.getAddresses().size() + 1){
                         getShippingAddress(customer);
                         addAnotherAddress = true;
                     }
@@ -122,8 +122,7 @@ int main() {
 
 
                 // Create a new order and clear cart
-                cout << addressChoice;
-                orders.emplace_back(orders.size() + 1, cart.getItems(), customer, customer.getAddresses()[addressChoice]);
+                orders.emplace_back(orders.size() + 1, cart.getItems(), customer, addressChoice-1);
                 cart.clearCart();
 
                 cout << "Successfully checked out the products! Order ID: " << orders.size() << endl;
