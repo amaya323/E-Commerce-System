@@ -27,5 +27,6 @@ public:
 
     // Getter for product price
     double getPrice() const;
+
 };
 #endif //PRODUCT_H

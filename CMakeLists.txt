@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.29.6)
 project(Demolol)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -17,4 +17,5 @@ add_executable(Demolol main.cpp
         Class/ShoppingItem.cpp
         Class/ShoppingItem.h
         Functions.h
+        main.cpp
 )

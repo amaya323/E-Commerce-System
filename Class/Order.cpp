@@ -3,13 +3,9 @@
 
 #include <utility>
 
-Order::Order(int orderId, vector<ShoppingItem> orderItems, Customer customer){
+Order::Order(int orderId, vector<ShoppingItem> orderItems, const Customer& customer, int addressId): customer(customer){
     this->orderId = orderId;
-    this->customer = customer;
     this->orderItems = orderItems;
-}
-
-void Order::setAddressId(int addressId) {
     this->addressId = addressId;
 }
 
@@ -17,39 +13,39 @@ int Order::getAddressId() const {
     return addressId;
 }
 
-int Order::getOrderId() const {
-    return orderId;
-}
-
-double Order::getTotalAmount() const {
+double Order::getTotalPrice() const {
     double total = 0;
-    for (const auto &item: orderItems) {
+    for (const auto &item : orderItems) {  // Use orderItems, NOT shoppingItems
         total += item.getProduct().getPrice() * item.getQuantity();
     }
     return total;
 }
 
-void Order::viewOrder() const {
+void Order::viewShoppingItems() const {
     cout << "Shipping Details:" << endl;
     cout << "Received by: " <<customer.getName() << endl;
     cout << "Contact Number: " << customer.getAddresses()[getAddressId()].getContactNumber() << endl;
     cout << "Address: " << customer.getAddresses()[getAddressId()].getAddress() << endl << endl;
 
-    cout << "Order ID: " << orderId << endl;
-    cout << "Total Amount: " << fixed << setprecision(2) << getTotalAmount() << endl;
+    cout << "Order ID: " << orderId << endl << endl;
+
     cout << left << setw(12) << "Product ID"
-            << setw(20) << "Name"
-            << setw(10) << "Price"
-            << setw(10) << "Quantity"
-            << endl;
+         << setw(20) << "Name"
+         << setw(10) << "Price"
+         << setw(10) << "Quantity"
+         << endl;
 
-    cout << string(52, '-') << endl;
+    cout << string(52, '-') << endl; // Print a separator line
 
-    for (const auto &item: orderItems) {
+    for (const auto &item : orderItems) {  // Use orderItems instead of shoppingItems
         cout << left << setw(12) << item.getProduct().getProductId()
-                << setw(20) << item.getProduct().getProductName()
-                << setw(10) << fixed << setprecision(2) << item.getProduct().getPrice()
-                << setw(10) << item.getQuantity()
-                << endl;
+             << setw(20) << item.getProduct().getProductName()
+             << setw(10) << fixed << setprecision(2) << item.getProduct().getPrice()
+             << setw(10) << item.getQuantity()
+             << endl;
     }
+    cout << string(52, '-') << endl;
+    cout << "Total: " << fixed << setprecision(2) << getTotalPrice() << endl;
 }
+
+

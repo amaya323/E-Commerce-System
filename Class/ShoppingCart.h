@@ -7,6 +7,7 @@ class ShoppingCart {
 private:
     vector<ShoppingItem> shoppingItems;
 
+
 public:
 
     // Function to add an item to shopping cart
