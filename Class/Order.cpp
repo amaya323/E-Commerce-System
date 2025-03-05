@@ -22,12 +22,14 @@ double Order::getTotalPrice() const {
 }
 
 void Order::viewShoppingItems() const {
+
+
+
+    cout << "Order ID: " << orderId << endl << endl;
     cout << "Shipping Details:" << endl;
     cout << "Received by: " <<customer.getName() << endl;
     cout << "Contact Number: " << customer.getAddresses()[getAddressId()].getContactNumber() << endl;
     cout << "Address: " << customer.getAddresses()[getAddressId()].getAddress() << endl << endl;
-
-    cout << "Order ID: " << orderId << endl << endl;
 
     cout << left << setw(12) << "Product ID"
          << setw(20) << "Name"
@@ -46,6 +48,7 @@ void Order::viewShoppingItems() const {
     }
     cout << string(52, '-') << endl;
     cout << "Total: " << fixed << setprecision(2) << getTotalPrice() << endl;
+    cout << string(52, '-') << endl; // Print a separator line
 }
 
 
