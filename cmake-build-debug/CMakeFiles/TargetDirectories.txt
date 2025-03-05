@@ -1,3 +1,0 @@
-C:/Users/balio/Demolol/cmake-build-debug/CMakeFiles/Demolol.dir
-C:/Users/balio/Demolol/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/balio/Demolol/cmake-build-debug/CMakeFiles/rebuild_cache.dir
