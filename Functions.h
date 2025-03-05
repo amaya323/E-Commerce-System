@@ -67,6 +67,23 @@ bool validNumber(const string& input, int &output) {
     }
 }
 
+// Generic function to validate numerical input within a range
+void getValidatedInput(const string &prompt, int &output, int minVal, int maxVal) {
+    string input;
+    bool isValid = false;
+
+    do {
+        cout << prompt;
+        getline(cin, input);
+
+        if (validNumber(input, output) && output >= minVal && output <= maxVal) {
+            isValid = true;
+        } else {
+            cout << "Error: Invalid input. Please enter a number between " << minVal << " and " << maxVal << ".\n";
+        }
+    } while (!isValid);
+}
+
 // Function to handle returning to the menu
 void backMenu(string& placeholder, int& backToMenu) {
     cout << endl << "[1] Back to Menu." << endl;
@@ -92,22 +109,17 @@ void getShippingAddress(Customer& customer, string& placeholder) {
     char anotherAddress = 0; // Variable to store user response
 
     do {
-        string name;
         string address;
         string contact;
 
-        // Get order recipient name
-        cout << endl << "Enter recipient's name: ";
-        getline(cin, name);
-
         // Get recipient address
-        cout << "Enter recipient's address: ";
+        cout << "Enter address: ";
         getline(cin, address);
 
         // Get contact number
         bool isContactValid = false;
         do {
-            cout << "Enter recipient's number (09XXXXXXXXX): ";
+            cout << "Enter number (09XXXXXXXXX): ";
             getline(cin, contact);
             if (contact.size() == 11 && contact[0] == '0' && contact[1] == '9') {
                 isContactValid = true;
@@ -117,7 +129,7 @@ void getShippingAddress(Customer& customer, string& placeholder) {
         } while (!isContactValid);
 
         // Add address to the customer's address list
-        customer.addAddress(name, address, contact);
+        customer.addAddress(address, contact);
 
         // Ask if the user wants to add another address
         yesOrNo("Do you want to add another address? (Y/N): ", placeholder, anotherAddress);
@@ -129,9 +141,6 @@ void getShippingAddress(Customer& customer, string& placeholder) {
 void getCustomer(Customer& customer, string& placeholder) {
     char addShipping = 0; // Variable to store user response
     string name;
-
-    // Display welcome message
-    printTitle("Welcome Customer!");
 
     // Get customer name
     cout << "Enter name: ";
@@ -145,7 +154,7 @@ void getCustomer(Customer& customer, string& placeholder) {
     yesOrNo("Do you want to add a shipping address? (Y/N): ", placeholder, addShipping);
 
     // If user chooses to add a shipping address, call the function to collect addresses
-    if (addShipping == 'Y' || addShipping == 'y') {
+    if (tolower(addShipping) == 'y') {
         getShippingAddress(customer, placeholder);
     }
 }

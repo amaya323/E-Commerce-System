@@ -22,7 +22,9 @@ public:
     void setCustomerName(string name);
 
     // Function to add address
-    void addAddress(string name, string address, string contact);
+    void addAddress(string address, string contact);
+
+    string getName() const;
 
     // Getter for addresses
     vector <Address> getAddresses() const;

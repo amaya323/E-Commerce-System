@@ -8,8 +8,12 @@ void Customer::setCustomerName(string name) {
     customerName = name;
 }
 
-void Customer::addAddress(string name, string address, string contact) {
-    addresses.emplace_back(name, address, contact);
+void Customer::addAddress(string address, string contact) {
+    addresses.emplace_back(address, contact);
+}
+
+string Customer::getName() const {
+    return customerName;
 }
 
 vector<Address> Customer::getAddresses() const {
@@ -18,7 +22,6 @@ vector<Address> Customer::getAddresses() const {
 
 void Customer::printAddresses() {
     cout << left << setw(5) << " "
-            << setw(15) << "Recipient"
             << setw(12) << "Address"
             << endl;
     cout << string(52, '-') << endl; // Print a separator line
@@ -27,7 +30,6 @@ void Customer::printAddresses() {
     for (const auto &address: addresses) {
         counter++;
         cout << left << setw(5) << counter
-                << setw(15) << address.getName()
                 << setw(12) << address.getAddress()
                 << endl;
     }

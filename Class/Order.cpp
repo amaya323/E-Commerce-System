@@ -1,9 +1,20 @@
 
 #include "Order.h"
 
-Order::Order(int orderId, vector<ShoppingItem> orderItems, Address add): address(add) {
+#include <utility>
+
+Order::Order(int orderId, vector<ShoppingItem> orderItems, Customer customer){
     this->orderId = orderId;
+    this->customer = customer;
     this->orderItems = orderItems;
+}
+
+void Order::setAddressId(int addressId) {
+    this->addressId = addressId;
+}
+
+int Order::getAddressId() const {
+    return addressId;
 }
 
 int Order::getOrderId() const {
@@ -20,9 +31,9 @@ double Order::getTotalAmount() const {
 
 void Order::viewOrder() const {
     cout << "Shipping Details:" << endl;
-    cout << "Received by: " << address.getName() << endl;
-    cout << "Contact Number: " << address.getContactNumber() << endl;
-    cout << "Address: " << address.getAddress() << endl << endl;
+    cout << "Received by: " <<customer.getName() << endl;
+    cout << "Contact Number: " << customer.getAddresses()[getAddressId()].getContactNumber() << endl;
+    cout << "Address: " << customer.getAddresses()[getAddressId()].getAddress() << endl << endl;
 
     cout << "Order ID: " << orderId << endl;
     cout << "Total Amount: " << fixed << setprecision(2) << getTotalAmount() << endl;

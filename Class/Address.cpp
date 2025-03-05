@@ -1,13 +1,8 @@
 #include "Address.h"
 
-Address::Address(string name, string address, string contactNumber) {
-    this->name = name;
+Address::Address(string address, string contactNumber) {
     this->address = address;
     this->contactNumber = contactNumber;
-}
-
-string Address::getName() const{
-    return name;
 }
 
 string Address::getAddress() const{
