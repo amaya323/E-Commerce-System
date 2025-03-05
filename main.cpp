@@ -3,6 +3,7 @@
 using namespace std;
 
 // Main function to run the e-commerce system
+// Amaya
 int main() {
     // List of available products
     vector<Product> productList = {
