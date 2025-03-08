@@ -51,8 +51,19 @@ int main() {
                 if (productId == backToMenu) { break; } // Return to menu
 
                 // Prompt user to enter quantity
-                getValidatedInput("Enter quantity: ", quantity, 1, INT_MAX);
-                cart.addItem(productList[productId - 1], quantity);
+                getValidatedInput("Enter quantity: ", quantity, 1, 100);
+
+                bool isAlreadyExists = false;
+                for (int i = 0; i < cart.getItems().size(); i++) {
+                    if (cart.getItems()[i].getProduct().getProductId() == productId) {
+                        cart.addQuantity(i, quantity);
+                        isAlreadyExists = true;
+                        break;
+                    }
+                }
+                if (isAlreadyExists == false) {
+                    cart.addItem(productList[productId - 1], quantity);
+                }
 
                 // Ask if the user wants to add another product
                 askYesOrNo("Do you want to add another product? (Y/N): ", choicePlaceholder, addMoreToCart);

@@ -11,3 +11,8 @@ Product ShoppingItem::getProduct() const {
 int ShoppingItem::getQuantity() const {
     return quantity;
 }
+
+void ShoppingItem::addQuantity(int quantity) {
+    cout << "Adding quantity " <<endl;
+    this->quantity = getQuantity() + quantity;
+}

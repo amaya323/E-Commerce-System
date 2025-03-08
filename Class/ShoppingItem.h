@@ -18,6 +18,9 @@ public:
     // Getter for quantity of the product to order or add to cart
     int getQuantity() const;
 
+    // function to add quantity
+    void addQuantity(int qty);
+
 };
 
 #endif //SHOPPINGITEM_H
