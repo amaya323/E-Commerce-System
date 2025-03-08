@@ -24,6 +24,8 @@ public:
 
     // Function to clear the cart (if cart is checked out successfully)
     void clearCart();
+
+    void addQuantity(int index, double quantity);
 };
 
 #endif //SHOPPINGCART_H

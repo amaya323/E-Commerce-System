@@ -37,6 +37,11 @@ vector<ShoppingItem> ShoppingCart::getItems() {
     return shoppingItems;
 }
 
+void ShoppingCart::addQuantity(int index, double quantity) {
+    shoppingItems.at(index).addQuantity(quantity);
+}
+
 void ShoppingCart::clearCart() {
     shoppingItems.clear();
 }
+
